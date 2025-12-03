@@ -1,0 +1,48 @@
+from collections import deque
+
+queue = deque() # novbenin yaradilmasi
+
+# Musteri elave eden funk
+def add_customer():
+    name = input("Musterinin adi: ")
+    medicine = input("Dermanin adi: ")
+    queue.append((name, medicine))
+    print(f"{name} '{medicine}' ucun novbeye elave oldu.\n")
+
+# musteriye xidmet eden funk
+def serve_customer():
+    if queue:
+        name, medicine = queue.popleft() #FIFO ile musteri siyahidan cixarilir
+        print(f"{name} adli musteriye '{medicine}' dermani verildi.\n")
+    else:
+        print("Novbe bosdu.\n")
+
+# novbeni gosteren funksiya
+def show_queue():
+    if queue:
+        print("Indiki novbe:")
+        for i, (name, medicine) in enumerate(queue, start=1):
+            print(f"{i}. {name} - {medicine}")
+        print()
+    else:
+        print("Novbe bosdur.\n")
+
+while True: # menyu sistemi
+    print("1. Musteri elave Et")
+    print("2. Novbe sistemini ise sal")
+    print("3. Novbe sirasini goster")
+    print("4. Cix")
+
+    secim = input("Istifade etmek istediyiniz funksiyani sec (1-4): ")
+
+    if secim == "1":
+        add_customer()
+    elif secim == "2":
+        serve_customer()
+    elif secim == "3":
+        show_queue()
+    elif secim == "4":
+        print("Proqram bitdi")
+        break
+    else:
+        print("Yalniz 1-4 reqemlerinden istifade ede bilersiniz\n")
